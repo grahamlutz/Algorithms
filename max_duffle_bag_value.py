@@ -12,7 +12,6 @@ You brought a duffel bag that can hold limited weight, and you want to make off 
 
 Write a function max_duffel_bag_value() that takes a list of cake type tuples and a weight capacity, and returns the maximum monetary value the duffel bag can hold.
 '''
-from operator import itemgetter
 
 def max_duffel_bag_value(cake_tuples, capacity):
 	# remove cakes with weight of 0
