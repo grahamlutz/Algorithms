@@ -1,14 +1,9 @@
 #
-# sum up any sequence of consecutive integers
+# sum up any sequence of consecutive integers from 1-n
 #
 
-def sum_of_sequence(list):
-	listLength = len(list)
-	first = list[0]
-	last = list[listLength-1]
-
-	sum = (first + last) * (float(listLength) / 2)
+def sum_of_sequence(n):
+	sum = (n + 1) * (n / 2)
 	print sum
 
-sequence = [0,1,2,3,4,5,6]
-sum_of_sequence(sequence)
+sum_of_sequence(6)
