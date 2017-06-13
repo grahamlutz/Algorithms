@@ -85,7 +85,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 # print 'unit_list'
 # print '\n'
-# pp.pprint(grid_values(grid1))
+pp.pprint(grid_values(grid1))
 # print '\n'
 # print 'squares'
 # print '\n'
