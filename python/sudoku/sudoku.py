@@ -76,26 +76,4 @@ def display(values):
         if r in 'CF': print(line)
     print
 
-grid1 = '003020600900305001001806400008132900700000008006708200002609500800203009005010300'
 
-# display(parse_grid(grid1))
-
-
-pp = pprint.PrettyPrinter(indent=4)
-
-# print 'unit_list'
-# print '\n'
-pp.pprint(grid_values(grid1))
-# print '\n'
-# print 'squares'
-# print '\n'
-# pp.pprint(squares)
-# print '\n'
-# print 'units'
-# print '\n'
-# pp.pprint(units)
-# print '\n'
-# print 'peers'
-# print '\n'
-# pp.pprint(peers)
-# print '\n'
