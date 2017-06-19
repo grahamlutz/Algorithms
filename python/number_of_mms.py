@@ -11,17 +11,14 @@ Constraints:
 import matplotlib.pylab as plt
 import numpy as np
 
-def run(n):
+def pick_all_the_colors(n):
     """
     n: number of different M&M's
-    return: number of picks it took to get all 10
+    return: number of picks it took to get all n colors
     """
     totalpicks = 0
     picked = set()
-    while True:
-        # check if we have enough
-        if len(picked) == n:
-            break
+    while len(picked) < n:
         # pick an M&M
         currentpick = np.random.randint(0, n)  # choose a M&M, randomly 1/n
         totalpicks += 1
@@ -34,7 +31,7 @@ def run_sequence(n, trials):
         totalpicks = 0
 
         for x in range(1, trials):
-            totalpicks += run(y)
+            totalpicks += pick_all_the_colors(y)
 
         print(totalpicks / float(trials))
         plt.ion()
