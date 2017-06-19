@@ -63,5 +63,13 @@ class HashTable(size):
 		# return sum % table_size
 		return key % size
 
-	def rehash():
-		return
+	def rehash(self, old_hash, size):
+		return (old_hash + 1) % size
+
+Table = HashTable(7)
+Table[77] = 'tada'
+
+print(Table.slots)
+print(Table.data)
+
+
