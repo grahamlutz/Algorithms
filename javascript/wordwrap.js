@@ -18,7 +18,7 @@
  * so please re-read your code before submitting it.
  */
 
-function wordWrap(input, maxLen) {
+function wordWrap(startIndex, input, maxLen) {
     // Base cases
     if (input === null || input === "" || input.length <= maxLen) return input;
 
@@ -49,6 +49,56 @@ function wordWrap(input, maxLen) {
     return string;
 }
 
+function recursiveWordWrap(startIndex, input, maxLen) {
+    // Base cases
+    if ( input === null            || 
+         input === ""              || 
+         input.length <= maxLen    ||
+         startIndex < 0            || 
+         startIndex > input.length 
+        ) { 
+        return input;
+    }
+
+    if (input[startIndex] == ' ') {
+        input = replaceCharAt(input, startIndex, '\n');
+        return recursiveWordWrap(startIndex + maxLen, input, maxLen)
+    } else {
+        startIndex--
+        return recursiveWordWrap(startIndex, input, maxLen)
+    }
+}
+
+function wordWrapViaSplit (startIndex, input, maxLen) {
+    // Base cases
+    if (input === null || input === "" || input.length <= maxLen) return input;
+
+    let arrayOfWords = input.split(' ');
+    let currentLineLength = 0;
+    let formattedString = '';
+
+    for (let i = 0; i < arrayOfWords.length; i++) {
+        let thisWord = arrayOfWords[i];
+        if ( currentLineLength + thisWord.length >= maxLen ) {
+            formattedString += '\n';
+            currentLineLength = 0
+            formattedString += thisWord;
+            currentLineLength += thisWord.length
+        } else {
+            if (currentLineLength != 0) {
+                formattedString += ' ';
+                currentLineLength += 1;
+            }
+            formattedString += thisWord;
+            currentLineLength += thisWord.length
+        }
+    }
+
+    return formattedString;
+}
+
+
+
 function replaceCharAt(string, index, char){
     return string.substr(0,index) + char + string.substr(index+1);
 }
@@ -66,24 +116,34 @@ function replaceCharAt(string, index, char){
     ["Clean", "This wraps at 10",
               "This wraps\nat 10"],
     ["Hard",  "This is badly written and hard to wrap",
-              "This is\nbadly\nwritten\nand hard\nto wrap"],
-    ["Long First Word",  "Thisisbadly written and hard to wrap",
-              "Thisisbadly\nwritten\nand hard\nto wrap"],
+              "This is\nbadly\nwritten\nand hard\nto wrap"]
 ].forEach(function (testCase) {
-    // Extract the test case
-    var caseName = testCase[0];
-    var input = testCase[1];
-    var expected = testCase[2];
+
+    var options = {
+        caseName: testCase[0],
+        input: testCase[1],
+        expected: testCase[2],
+        startIndex: 10,
+        maxLen: 10
+    }
 
     // Run the test
-    var actual = wordWrap(input, 10);
+    test(recursiveWordWrap, options)
+    test(wordWrap, options)
+    test(wordWrapViaSplit, options)
+});
+
+function test(func, options) {
+    var actual = func(options.startIndex, options.input, options.maxLen);
 
     // Did it fail?
-    if (actual !== expected) {
-        console.log("--Failed case " + caseName + ", expected:");
-        console.log(expected);
+    if (actual !== options.expected) {
+        console.log("--Failed case " + options.caseName + ", expected:");
+        console.log(options.expected);
         console.log("--But got:");
         console.log(actual);
         console.log("\n\n");
+    } else {
+        console.log( options.caseName + " case passed!");
     }
-});
+}
