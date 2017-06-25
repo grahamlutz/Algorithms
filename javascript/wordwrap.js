@@ -128,9 +128,9 @@ function replaceCharAt(string, index, char){
     }
 
     // Run the test
-    test(recursiveWordWrap, options)
     test(wordWrap, options)
     test(wordWrapViaSplit, options)
+    test(recursiveWordWrap, options)
 });
 
 function test(func, options) {
