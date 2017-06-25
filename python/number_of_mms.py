@@ -42,3 +42,5 @@ def run_sequence(n, trials):
 
 if __name__ == '__main__':
     run_sequence(10, 1000)
+
+
